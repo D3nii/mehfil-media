@@ -49,7 +49,7 @@ export function Footer() {
             <ul className="space-y-5">
               <li>
                 <Link
-                  href="#"
+                  href="/#home"
                   className="font-sans text-[13px] font-medium text-on-surface-variant transition-colors hover:text-tertiary"
                 >
                   The Studio
@@ -57,7 +57,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="#niches"
+                  href="/#niches"
                   className="font-sans text-[13px] font-medium text-on-surface-variant transition-colors hover:text-tertiary"
                 >
                   Niches
@@ -65,7 +65,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="#process"
+                  href="/#process"
                   className="font-sans text-[13px] font-medium text-on-surface-variant transition-colors hover:text-tertiary"
                 >
                   Methodology
@@ -119,13 +119,13 @@ export function Footer() {
           </p>
           <div className="flex gap-8">
             <Link
-              href="#"
+              href="/privacy"
               className="font-sans text-xs font-medium text-on-surface-variant transition-colors hover:text-primary"
             >
               Privacy
             </Link>
             <Link
-              href="#"
+              href="/terms"
               className="font-sans text-xs font-medium text-on-surface-variant transition-colors hover:text-primary"
             >
               Terms

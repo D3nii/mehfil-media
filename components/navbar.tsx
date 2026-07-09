@@ -1,26 +1,31 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { DISCORD_INVITE_URL } from "@/lib/links";
 
 const navLinks = [
-  { href: "#home", id: "home", label: "Home" },
-  { href: "#process", id: "process", label: "Process" },
-  { href: "#niches", id: "niches", label: "Niches" },
-  { href: "#testimonials", id: "testimonials", label: "Stories" },
+  { href: "/#home", id: "home", label: "Home" },
+  { href: "/#process", id: "process", label: "Process" },
+  { href: "/#niches", id: "niches", label: "Niches" },
+  { href: "/#testimonials", id: "testimonials", label: "Stories" },
 ] as const;
 
 type SectionId = (typeof navLinks)[number]["id"];
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionId>("home");
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      if (!isHome) return;
 
       const offset = 120;
       let current: SectionId = "home";
@@ -40,7 +45,7 @@ export function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
   return (
     <nav
@@ -51,7 +56,7 @@ export function Navbar() {
       <div className="mx-auto flex w-full max-w-[var(--spacing-container-max)] items-center justify-between px-[var(--spacing-margin-mobile)] py-6 md:px-[var(--spacing-margin-desktop)]">
         <div className="flex items-center">
           <Link
-            href="#home"
+            href="/"
             className="font-display text-[28px] font-medium leading-9 tracking-tight text-primary"
           >
             Mehfil Media
@@ -63,7 +68,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-10 md:flex">
           {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
+            const isActive = isHome && activeSection === link.id;
 
             return (
               <Link
