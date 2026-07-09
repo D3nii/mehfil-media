@@ -1,7 +1,7 @@
+import { HomepageNiches } from "@/components/catalog";
 import {
   Features,
   FinalCta,
-  Niches,
   Stats,
   Testimonials,
 } from "@/components/content-sections";
@@ -13,8 +13,11 @@ import {
   Preview,
 } from "@/components/hero-sections";
 import { Navbar } from "@/components/navbar";
+import { getAllNiches } from "@/lib/catalog";
 
 export default function Home() {
+  const niches = getAllNiches();
+
   return (
     <>
       <Navbar />
@@ -23,7 +26,7 @@ export default function Home() {
         <Preview />
         <Methodology />
         <Philosophy />
-        <Niches />
+        <HomepageNiches niches={niches} />
         <Features />
         <Testimonials />
         <Stats />

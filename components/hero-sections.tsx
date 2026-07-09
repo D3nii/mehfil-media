@@ -37,7 +37,7 @@ export function Hero() {
 
           <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-center">
             <Link
-              href="#niches"
+              href="/catalog"
               className="rounded-full bg-primary px-12 py-5 font-sans text-sm font-semibold tracking-wide text-on-primary shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95"
             >
               Explore Our Gallery

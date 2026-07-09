@@ -9,7 +9,7 @@ import { DISCORD_INVITE_URL } from "@/lib/links";
 const navLinks = [
   { href: "/#home", id: "home", label: "Home" },
   { href: "/#process", id: "process", label: "Process" },
-  { href: "/#niches", id: "niches", label: "Niches" },
+  { href: "/catalog", id: "niches", label: "Niches" },
   { href: "/#testimonials", id: "testimonials", label: "Stories" },
 ] as const;
 
@@ -18,6 +18,7 @@ type SectionId = (typeof navLinks)[number]["id"];
 export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isCatalog = pathname.startsWith("/catalog");
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionId>("home");
 
@@ -68,7 +69,10 @@ export function Navbar() {
 
         <div className="hidden items-center gap-10 md:flex">
           {navLinks.map((link) => {
-            const isActive = isHome && activeSection === link.id;
+            const isActive =
+              link.id === "niches"
+                ? isCatalog || (isHome && activeSection === "niches")
+                : isHome && activeSection === link.id;
 
             return (
               <Link

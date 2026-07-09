@@ -57,10 +57,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/#niches"
+                  href="/catalog"
                   className="font-sans text-[13px] font-medium text-on-surface-variant transition-colors hover:text-tertiary"
                 >
-                  Niches
+                  Catalog
                 </Link>
               </li>
               <li>
