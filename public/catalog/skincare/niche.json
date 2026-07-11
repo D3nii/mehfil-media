@@ -1,0 +1,10 @@
+{
+  "title": "Skincare",
+  "description": "Serums, creams and routines — honest-feeling demos that walk your audience from bottle to glow.",
+  "cta": "Explore Skincare",
+  "icon": "spa",
+  "featured": true,
+  "order": 5,
+  "aspect": "portrait",
+  "cover": "cover.jpg"
+}

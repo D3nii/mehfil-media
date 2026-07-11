@@ -1,0 +1,10 @@
+{
+  "title": "Ice Cream",
+  "description": "Tubs, bars and family packs — first-scoop reactions filmed in a real kitchen before it melts.",
+  "cta": "Explore Ice Cream",
+  "icon": "icecream",
+  "featured": true,
+  "order": 7,
+  "aspect": "portrait",
+  "cover": "cover.jpg"
+}

@@ -1,0 +1,280 @@
+"use client";
+
+import Image from "next/image";
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "motion/react";
+
+import { heroImages } from "@/lib/showcase";
+
+type VariationCardProps = {
+  src: string;
+  index: number;
+  spread: MotionValue<number>;
+  position: { x: number; y: number; r: number };
+};
+
+function VariationCard({ src, index, spread, position }: VariationCardProps) {
+  const x = useTransform(spread, (v) => `${v * position.x * 78}%`);
+  const y = useTransform(spread, (v) => `${v * position.y * 42}%`);
+  const rotate = useTransform(spread, (v) => v * position.r);
+  const scale = useTransform(spread, [0, 1], [0.9, 0.72]);
+  const opacity = useTransform(spread, [0, 0.25], [0, 1]);
+
+  return (
+    <motion.div
+      className="absolute inset-0 overflow-hidden rounded-3xl border border-line bg-ivory shadow-[0_30px_60px_rgba(23,19,16,0.18)]"
+      style={{ x, y, rotate, scale, opacity }}
+    >
+      <Image
+        src={src}
+        alt={`Generated campaign variation ${index + 1}`}
+        fill
+        className="object-cover"
+        sizes="320px"
+      />
+      <div className="absolute bottom-3 left-3 rounded-full bg-ivory/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-ink backdrop-blur">
+        Cut {String(index + 1).padStart(2, "0")}
+      </div>
+    </motion.div>
+  );
+}
+
+/**
+ * Pinned hero (300vh of scroll). One continuous transformation:
+ *   scene 1 — a lone product, being "read" by a scan line
+ *   scene 2 — the product dissolves into an AI creator holding the story
+ *   scene 3 — the creator becomes a live reel and explodes into variations
+ */
+export function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: rawProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+  // Spring keeps every transform JS-driven (avoids WAAPI scroll-timeline
+  // desync with the sticky container) and adds cinematic lag.
+  const scrollYProgress = useSpring(rawProgress, {
+    stiffness: 400,
+    damping: 50,
+    restDelta: 0.0005,
+  });
+
+  // ── scene 1: product ───────────────────────────────────────
+  const productOpacity = useTransform(scrollYProgress, [0.24, 0.34], [1, 0]);
+  const productScale = useTransform(scrollYProgress, [0, 0.34], [1, 0.82]);
+  const scanY = useTransform(scrollYProgress, [0.04, 0.3], ["0%", "100%"]);
+  const scanOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.04, 0.26, 0.32],
+    [0, 1, 1, 0],
+  );
+
+  // ── scene 2: creator reveal ────────────────────────────────
+  const creatorClip = useTransform(
+    scrollYProgress,
+    [0.28, 0.46],
+    ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)"],
+  );
+  const creatorScale = useTransform(
+    scrollYProgress,
+    [0.46, 0.72],
+    [1, 0.92],
+  );
+
+  // ── scene 3: reel chrome + variation explosion ─────────────
+  const chromeOpacity = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
+  const spread = useTransform(scrollYProgress, [0.62, 0.9], [0, 1]);
+
+  const ambientOpacity = useTransform(scrollYProgress, [0.3, 0.7], [0, 1]);
+
+  // headline phases
+  const h1Opacity = useTransform(scrollYProgress, [0, 0.22, 0.3], [1, 1, 0]);
+  const h1Y = useTransform(scrollYProgress, [0.22, 0.3], ["0%", "-60%"]);
+  const h2Opacity = useTransform(
+    scrollYProgress,
+    [0.3, 0.38, 0.54, 0.62],
+    [0, 1, 1, 0],
+  );
+  const h3Opacity = useTransform(scrollYProgress, [0.66, 0.76], [0, 1]);
+
+  const scrollHintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
+
+  const variationPositions = [
+    { x: -1.15, y: -0.55, r: -9 },
+    { x: 1.15, y: -0.45, r: 8 },
+    { x: -1.05, y: 0.6, r: 6 },
+    { x: 1.05, y: 0.55, r: -7 },
+  ];
+
+  return (
+    <section ref={ref} aria-label="Hero" className="relative h-[300vh]">
+      <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
+        {/* ambient accent wash that warms up as the story progresses */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            opacity: ambientOpacity,
+            background:
+              "radial-gradient(circle at 50% 60%, rgba(196,13,83,0.07), transparent 55%)",
+          }}
+        />
+
+        {/* headlines */}
+        <div className="pointer-events-none absolute inset-x-0 top-[13vh] z-20 px-6 text-center">
+          <motion.div style={{ opacity: h1Opacity, y: h1Y }}>
+            <h1 className="mx-auto max-w-5xl text-[13vw] font-medium leading-[0.95] tracking-tight md:text-[7.5vw]">
+              Your product has
+              <br />
+              <span className="serif-accent text-rani">a voice.</span>
+            </h1>
+          </motion.div>
+          <motion.div
+            className="absolute inset-x-0 top-0"
+            style={{ opacity: h2Opacity }}
+          >
+            <p className="mx-auto max-w-5xl text-[13vw] font-medium leading-[0.95] tracking-tight md:text-[7.5vw]">
+              She gives it
+              <br />
+              <span className="serif-accent text-rani">a face.</span>
+            </p>
+          </motion.div>
+          <motion.div
+            className="absolute inset-x-0 top-0"
+            style={{ opacity: h3Opacity }}
+          >
+            <p className="mx-auto max-w-5xl text-[13vw] font-medium leading-[0.95] tracking-tight md:text-[7.5vw]">
+              Then it goes
+              <br />
+              <span className="serif-accent text-rani">everywhere.</span>
+            </p>
+          </motion.div>
+        </div>
+
+        {/* central stage */}
+        <div className="relative z-10 mt-[24vh] h-[52vh] w-[min(64vw,320px)] md:h-[56vh]">
+          {/* variation cards behind the phone */}
+          {heroImages.variations.map((src, i) => (
+            <VariationCard
+              key={src}
+              src={src}
+              index={i}
+              spread={spread}
+              position={variationPositions[i]}
+            />
+          ))}
+
+          {/* the phone / stage card */}
+          <motion.div
+            className="absolute inset-0 overflow-hidden rounded-3xl border border-line bg-white shadow-[0_40px_80px_rgba(23,19,16,0.22)]"
+            style={{ scale: creatorScale }}
+          >
+            {/* scene 1: product */}
+            <motion.div
+              className="absolute inset-0"
+              style={{ opacity: productOpacity, scale: productScale }}
+            >
+              <Image
+                src={heroImages.product}
+                alt="A gold jhumka earring before transformation"
+                fill
+                className="object-cover"
+                sizes="320px"
+                priority
+              />
+              <div className="absolute left-4 top-4 rounded-full bg-ink/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-ivory backdrop-blur">
+                Input · 1 photo
+              </div>
+            </motion.div>
+
+            {/* scan line reading the product */}
+            <motion.div
+              aria-hidden
+              className="absolute inset-x-0 z-10 h-16 -translate-y-1/2"
+              style={{ top: scanY, opacity: scanOpacity }}
+            >
+              <div className="h-px w-full bg-rani shadow-[0_0_24px_4px_rgba(196,13,83,0.65)]" />
+              <div className="h-16 w-full bg-gradient-to-b from-rani/25 to-transparent" />
+            </motion.div>
+
+            {/* scene 2/3: creator, then her live reel */}
+            <motion.div
+              className="absolute inset-0"
+              style={{ clipPath: creatorClip }}
+            >
+              <Image
+                src={heroImages.creator}
+                alt="Mahnoor, the AI-generated creator, presenting the product"
+                fill
+                className="object-cover"
+                sizes="320px"
+              />
+
+              {/* the actual generated reel fades in and plays */}
+              <motion.video
+                src={heroImages.video}
+                poster={heroImages.videoPoster}
+                muted
+                loop
+                autoPlay
+                playsInline
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{ opacity: chromeOpacity }}
+              />
+
+              {/* reel chrome */}
+              <motion.div
+                className="absolute inset-0 flex flex-col justify-between bg-gradient-to-t from-ink/60 via-transparent to-ink/20 p-4"
+                style={{ opacity: chromeOpacity }}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="rounded-full bg-rani px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-ivory">
+                    Live reel
+                  </span>
+                  <span className="text-[10px] font-medium text-ivory/80">
+                    0:15
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold text-ivory">
+                    @mahnoor.mehfil
+                  </p>
+                  <p className="text-xs leading-relaxed text-ivory/85">
+                    Unboxing the jhumkas everyone asked about ✨
+                  </p>
+                  <div className="flex gap-4 text-[11px] font-medium text-ivory/90">
+                    <span>♥ 531K</span>
+                    <span>↗ 64K</span>
+                    <span>◎ 4.1M plays</span>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* scroll hint */}
+        <motion.div
+          className="absolute bottom-8 z-20 flex flex-col items-center gap-2"
+          style={{ opacity: scrollHintOpacity }}
+        >
+          <span className="text-[11px] uppercase tracking-[0.3em] text-muted">
+            Scroll to transform
+          </span>
+          <motion.span
+            aria-hidden
+            className="h-8 w-px bg-ink/30"
+            animate={{ scaleY: [1, 0.4, 1] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </motion.div>
+      </div>
+    </section>
+  );
+}

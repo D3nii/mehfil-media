@@ -1,24 +1,37 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import {
+  Instrument_Serif,
+  Noto_Nastaliq_Urdu,
+  Space_Grotesk,
+} from "next/font/google";
 
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const grotesk = Space_Grotesk({
+  variable: "--font-grotesk",
   subsets: ["latin"],
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const instrument = Instrument_Serif({
+  variable: "--font-instrument",
   subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const nastaliq = Noto_Nastaliq_Urdu({
+  variable: "--font-nastaliq",
+  subsets: ["arabic"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Mehfil Media | The Future of Authentic Content",
+  title: "Mehfil Media — AI Creators for Pakistani Brands",
   description:
-    "Merging the soul of Pakistani fashion with the precision of AI. Hyper-realistic lifestyle content for South Asian luxury brands.",
+    "Upload a product. Receive a campaign. AI-generated female creators producing scroll-stopping UGC for Pakistan's boldest brands — in 48 hours.",
 };
 
 export default function RootLayout({
@@ -29,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${jakarta.variable} scroll-smooth antialiased`}
+      className={`${grotesk.variable} ${instrument.variable} ${nastaliq.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
@@ -39,7 +52,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="min-h-full overflow-x-hidden bg-surface font-sans text-on-surface"
+        className="grain min-h-full overflow-x-clip bg-ivory text-ink"
         suppressHydrationWarning
       >
         {children}

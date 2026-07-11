@@ -1,119 +1,174 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-inverse-primary: #95d3ba;
-  --color-tertiary-container: #cca72f;
-  --color-surface-container-highest: #e3e1ec;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-variant: #e3e1ec;
-  --color-primary-fixed-dim: #95d3ba;
-  --color-on-primary-fixed-variant: #0b513d;
-  --color-on-error: #ffffff;
-  --color-tertiary: #735c00;
-  --color-on-secondary-container: #626360;
-  --color-on-secondary: #ffffff;
-  --color-surface-dim: #dad9e3;
-  --color-surface-container: #eeedf7;
-  --color-on-tertiary-container: #4e3d00;
-  --color-on-tertiary: #ffffff;
-  --color-primary: #003527;
-  --color-surface-container-high: #e8e7f1;
-  --color-on-secondary-fixed: #1b1c1a;
-  --color-secondary-fixed-dim: #c7c7c3;
-  --color-on-primary-container: #80bea6;
-  --color-secondary: #5e5f5c;
-  --color-on-tertiary-fixed: #241a00;
-  --color-tertiary-fixed: #ffe088;
-  --color-on-surface-variant: #404944;
-  --color-secondary-fixed: #e3e2df;
-  --color-surface-tint: #2b6954;
-  --color-outline: #707974;
-  --color-on-primary-fixed: #002117;
-  --color-inverse-surface: #2f3038;
-  --color-tertiary-fixed-dim: #e9c349;
-  --color-on-secondary-fixed-variant: #464744;
-  --color-on-primary: #ffffff;
-  --color-surface-container-low: #f4f2fd;
-  --color-on-background: #1a1b22;
-  --color-outline-variant: #bfc9c3;
-  --color-background: #fbf8ff;
-  --color-on-tertiary-fixed-variant: #574500;
-  --color-error-container: #ffdad6;
-  --color-surface-bright: #fbf8ff;
-  --color-surface: #fbf8ff;
-  --color-inverse-on-surface: #f1effa;
-  --color-primary-fixed: #b0f0d6;
-  --color-on-surface: #1a1b22;
-  --color-primary-container: #064e3b;
-  --color-error: #ba1a1a;
-  --color-on-error-container: #93000a;
+  /* ── Digital Mehfil palette ─────────────────────────────── */
+  --color-ivory: #faf6f0;
+  --color-ivory-deep: #f3ede3;
+  --color-ink: #171310;
+  --color-ink-soft: #48413a;
+  --color-muted: #7a7168;
+  --color-line: #e6ddd1;
+  --color-rani: #c40d53;
+  --color-rani-soft: #fbe9f0;
 
-  --font-display: var(--font-playfair);
-  --font-sans: var(--font-jakarta);
-  --font-body: var(--font-jakarta);
+  /* legacy token bridge (used by catalog + legal pages) */
+  --color-primary: #171310;
+  --color-on-primary: #faf6f0;
+  --color-primary-container: #171310;
+  --color-on-primary-container: #faf6f0;
+  --color-secondary: #7a7168;
+  --color-tertiary: #c40d53;
+  --color-tertiary-container: #c40d53;
+  --color-surface: #faf6f0;
+  --color-on-surface: #171310;
+  --color-on-surface-variant: #7a7168;
+  --color-surface-container: #f3ede3;
+  --color-surface-container-low: #f3ede3;
+  --color-surface-container-high: #ece4d7;
+  --color-primary-fixed-dim: #c40d53;
+  --color-tertiary-fixed: #fbe9f0;
+  --color-outline: #7a7168;
+  --color-outline-variant: #e6ddd1;
+
+  --font-sans: var(--font-grotesk);
+  --font-display: var(--font-grotesk);
+  --font-serif: var(--font-instrument);
+  --font-urdu: var(--font-nastaliq);
 
   --spacing-margin-mobile: 20px;
-  --spacing-base: 8px;
-  --spacing-section-gap: 120px;
   --spacing-margin-desktop: 64px;
-  --spacing-gutter: 24px;
-  --spacing-container-max: 1280px;
-
-  --radius-DEFAULT: 0.25rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-  --radius-full: 9999px;
-
-  --animate-ambient-float: ambient-float 8s ease-in-out infinite;
-}
-
-@keyframes ambient-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  --spacing-container-max: 1440px;
 }
 
 html {
-  scroll-behavior: smooth;
+  background: var(--color-ivory);
 }
 
 body {
-  background: var(--color-surface);
-  color: var(--color-on-surface);
-  font-family: var(--font-jakarta), system-ui, sans-serif;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-grotesk), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--color-primary-container);
-  color: var(--color-on-primary-container);
+  background: var(--color-rani);
+  color: var(--color-ivory);
 }
 
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-  display: inline-block;
-  vertical-align: middle;
+/* Instrument Serif italic accent inside headlines */
+.serif-accent {
+  font-family: var(--font-instrument), serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
-.material-symbols-outlined.filled {
-  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+.urdu {
+  font-family: var(--font-nastaliq), serif;
+  direction: rtl;
 }
 
+/* film grain over everything — the "expensive print" texture */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 200;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  animation: grain-shift 900ms steps(4) infinite;
+}
+
+@keyframes grain-shift {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2%, 3%);
+  }
+  50% {
+    transform: translate(3%, -2%);
+  }
+  75% {
+    transform: translate(-3%, -3%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* outlined display type for kinetic sections */
+.text-stroke {
+  -webkit-text-stroke: 1.5px var(--color-ink);
+  color: transparent;
+}
+
+.text-stroke-rani {
+  -webkit-text-stroke: 1.5px var(--color-rani);
+  color: transparent;
+}
+
+/* hide native cursor when custom cursor is active */
+@media (pointer: fine) {
+  .cursor-none-root,
+  .cursor-none-root a,
+  .cursor-none-root button {
+    cursor: none;
+  }
+}
+
+/* marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee 55s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-slow {
+    animation: none;
+  }
+  .grain::after {
+    animation: none;
+  }
+}
+
+/* soft ambient wash kept for catalog + legal pages */
 .digital-silk-bg {
   background:
     radial-gradient(
-      circle at 10% 20%,
-      rgba(176, 240, 214, 0.15) 0%,
-      transparent 40%
+      circle at 12% 15%,
+      rgba(196, 13, 83, 0.05) 0%,
+      transparent 45%
     ),
     radial-gradient(
-      circle at 90% 80%,
-      rgba(204, 167, 47, 0.08) 0%,
-      transparent 40%
+      circle at 88% 85%,
+      rgba(196, 13, 83, 0.04) 0%,
+      transparent 45%
     );
+}
+
+/* material icons kept for catalog pages */
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+  display: inline-block;
+  vertical-align: middle;
 }

@@ -1,0 +1,10 @@
+{
+  "title": "Jewelry",
+  "description": "From a single product photo to an unboxing reel — jhumkas, chandbalis and bridal sets performed by our AI creators.",
+  "cta": "Explore Jewelry",
+  "icon": "diamond",
+  "featured": true,
+  "order": 1,
+  "aspect": "portrait",
+  "cover": "cover.jpg"
+}

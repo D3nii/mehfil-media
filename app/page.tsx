@@ -1,38 +1,30 @@
-import { HomepageNiches } from "@/components/catalog";
-import {
-  Features,
-  FinalCta,
-  Stats,
-  Testimonials,
-} from "@/components/content-sections";
 import { Footer } from "@/components/footer";
-import {
-  Hero,
-  Methodology,
-  Philosophy,
-  Preview,
-} from "@/components/hero-sections";
-import { Navbar } from "@/components/navbar";
-import { getAllNiches } from "@/lib/catalog";
+import { Cursor } from "@/components/experience/cursor";
+import { Finale } from "@/components/experience/finale";
+import { Hero } from "@/components/experience/hero";
+import { LenisProvider } from "@/components/experience/lenis-provider";
+import { Loader } from "@/components/experience/loader";
+import { Manifesto } from "@/components/experience/manifesto";
+import { ExperienceNav } from "@/components/experience/nav";
+import { Pipeline } from "@/components/experience/pipeline";
+import { ReelStrip } from "@/components/experience/reel-strip";
+import { Worlds } from "@/components/experience/worlds";
 
 export default function Home() {
-  const niches = getAllNiches();
-
   return (
-    <>
-      <Navbar />
-      <main className="digital-silk-bg pt-32">
+    <LenisProvider>
+      <Loader />
+      <Cursor />
+      <ExperienceNav />
+      <main>
         <Hero />
-        <Preview />
-        <Methodology />
-        <Philosophy />
-        <HomepageNiches niches={niches} />
-        <Features />
-        <Testimonials />
-        <Stats />
-        <FinalCta />
+        <Manifesto />
+        <Pipeline />
+        <ReelStrip />
+        <Worlds />
+        <Finale />
       </main>
       <Footer />
-    </>
+    </LenisProvider>
   );
 }

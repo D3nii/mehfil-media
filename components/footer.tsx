@@ -1,138 +1,68 @@
 import Link from "next/link";
 
-import { MaterialIcon } from "@/components/ui";
 import { DISCORD_INVITE_URL } from "@/lib/links";
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-outline-variant/30 bg-surface-container-low pb-12 pt-32">
-      <div className="mx-auto max-w-[var(--spacing-container-max)] px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)]">
-        <div className="mb-24 grid grid-cols-1 gap-16 md:grid-cols-12">
-          <div className="space-y-8 md:col-span-4">
-            <Link
-              href="/"
-              className="font-display text-3xl font-medium tracking-tight text-primary"
-            >
+    <footer className="bg-ivory px-6 pb-10 pt-20 md:px-16">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="mb-16 flex flex-col justify-between gap-10 md:flex-row md:items-end">
+          <div>
+            <p className="mb-3 flex items-baseline gap-3 text-3xl font-semibold tracking-tight">
               Mehfil Media
+              <span className="urdu text-xl text-rani">محفل میڈیا</span>
+            </p>
+            <p className="max-w-sm text-sm leading-relaxed text-muted">
+              AI-generated creators for Pakistani brands. Made in Pakistan,
+              rendered in the future.
+            </p>
+          </div>
+
+          <nav className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
+            <a
+              href="#work"
+              className="text-ink-soft transition-colors hover:text-rani"
+            >
+              Work
+            </a>
+            <a
+              href="#how"
+              className="text-ink-soft transition-colors hover:text-rani"
+            >
+              How
+            </a>
+            <a
+              href="#worlds"
+              className="text-ink-soft transition-colors hover:text-rani"
+            >
+              Worlds
+            </a>
+            <Link
+              href="/catalog"
+              className="text-ink-soft transition-colors hover:text-rani"
+            >
+              Catalog
             </Link>
-            <p className="max-w-xs font-sans text-lg leading-relaxed text-on-surface-variant">
-              Jadeed technology, purana virsa.
-              <br />
-              Merging heritage with digital precision.
-            </p>
-            <div className="flex gap-6">
-              <a
-                href={DISCORD_INVITE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-outline-variant text-primary transition-all hover:bg-primary hover:text-on-primary"
-                aria-label="Join Discord"
-              >
-                <MaterialIcon name="forum" className="text-xl" />
-              </a>
-              <a
-                href={DISCORD_INVITE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-outline-variant text-primary transition-all hover:bg-primary hover:text-on-primary"
-                aria-label="Get services"
-              >
-                <MaterialIcon name="mail" className="text-xl" />
-              </a>
-            </div>
-          </div>
-
-          <div className="md:col-span-2">
-            <h5 className="mb-8 font-sans text-sm font-bold uppercase tracking-widest text-primary">
-              Company
-            </h5>
-            <ul className="space-y-5">
-              <li>
-                <Link
-                  href="/#home"
-                  className="font-sans text-[13px] font-medium text-on-surface-variant transition-colors hover:text-tertiary"
-                >
-                  The Studio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/catalog"
-                  className="font-sans text-[13px] font-medium text-on-surface-variant transition-colors hover:text-tertiary"
-                >
-                  Catalog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#process"
-                  className="font-sans text-[13px] font-medium text-on-surface-variant transition-colors hover:text-tertiary"
-                >
-                  Methodology
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-2">
-            <h5 className="mb-8 font-sans text-sm font-bold uppercase tracking-widest text-primary">
-              Programs
-            </h5>
-            <ul className="space-y-5">
-              <li>
-                <a
-                  href={DISCORD_INVITE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-sans text-[13px] font-medium text-on-surface-variant transition-colors hover:text-tertiary"
-                >
-                  Creator Program
-                </a>
-              </li>
-              <li>
-                <a
-                  href={DISCORD_INVITE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-sans text-[13px] font-medium text-on-surface-variant transition-colors hover:text-tertiary"
-                >
-                  Partnerships
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-4">
-            <h5 className="mb-8 font-sans text-sm font-bold uppercase tracking-widest text-primary">
-              Inspiration
-            </h5>
-            <p className="border-l-2 border-tertiary/30 pl-4 font-sans text-xs font-medium italic leading-relaxed text-on-surface-variant">
-              &ldquo;Creativity is the bridge between the heritage we carry and
-              the future we build.&rdquo;
-            </p>
-          </div>
+            <a
+              href={DISCORD_INVITE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink-soft transition-colors hover:text-rani"
+            >
+              Discord
+            </a>
+          </nav>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-6 border-t border-outline-variant/20 pt-10 md:flex-row">
-          <p className="font-sans text-xs font-medium tracking-wider text-on-surface-variant">
-            © 2026 Mehfil Media. Redefining South Asian Creative Expression.
-          </p>
-          <div className="flex gap-8">
-            <Link
-              href="/privacy"
-              className="font-sans text-xs font-medium text-on-surface-variant transition-colors hover:text-primary"
-            >
+        <div className="flex flex-col items-start justify-between gap-4 border-t border-line pt-6 text-xs text-muted md:flex-row md:items-center">
+          <p>© 2026 Mehfil Media. All creators are AI-generated.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="transition-colors hover:text-ink">
               Privacy
             </Link>
-            <Link
-              href="/terms"
-              className="font-sans text-xs font-medium text-on-surface-variant transition-colors hover:text-primary"
-            >
+            <Link href="/terms" className="transition-colors hover:text-ink">
               Terms
             </Link>
-            <p className="font-sans text-xs font-medium text-on-surface-variant">
-              Made with Soul in Pakistan
-            </p>
           </div>
         </div>
       </div>

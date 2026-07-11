@@ -1,0 +1,10 @@
+{
+  "title": "Fragrance",
+  "description": "Perfumes and attars given a face and a mood — scent stories your audience can almost smell.",
+  "cta": "Explore Fragrance",
+  "icon": "air",
+  "featured": true,
+  "order": 6,
+  "aspect": "portrait",
+  "cover": "cover.jpg"
+}

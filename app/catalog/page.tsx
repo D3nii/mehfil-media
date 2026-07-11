@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { CatalogIndex } from "@/components/catalog";
 import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
+import { ExperienceNav } from "@/components/experience/nav";
 import { getAllNiches } from "@/lib/catalog";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function CatalogPage() {
 
   return (
     <>
-      <Navbar />
+      <ExperienceNav />
       <CatalogIndex niches={niches} />
       <Footer />
     </>

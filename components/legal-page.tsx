@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
+import { ExperienceNav } from "@/components/experience/nav";
 import { DISCORD_INVITE_URL } from "@/lib/links";
 
 type LegalSection = {
@@ -25,7 +25,7 @@ export function LegalPage({
 }: LegalPageProps) {
   return (
     <>
-      <Navbar />
+      <ExperienceNav />
       <main className="digital-silk-bg pt-32">
         <article className="mx-auto max-w-3xl px-[var(--spacing-margin-mobile)] pb-24 pt-16 md:px-[var(--spacing-margin-desktop)] md:pb-32">
           <p className="mb-4 font-sans text-xs font-semibold uppercase tracking-[0.25em] text-tertiary">

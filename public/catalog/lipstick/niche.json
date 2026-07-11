@@ -1,0 +1,10 @@
+{
+  "title": "Lipstick",
+  "description": "Shades tested on camera under real light — swatch, apply, and sell the color story in one take.",
+  "cta": "Explore Lipstick",
+  "icon": "brush",
+  "featured": true,
+  "order": 4,
+  "aspect": "portrait",
+  "cover": "cover.jpg"
+}

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { CatalogDetail } from "@/components/catalog";
 import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
+import { ExperienceNav } from "@/components/experience/nav";
 import { getAllNiches, getNicheBySlug, getNicheSlugs } from "@/lib/catalog";
 
 type CatalogNichePageProps = {
@@ -44,7 +44,7 @@ export default async function CatalogNichePage({
 
   return (
     <>
-      <Navbar />
+      <ExperienceNav />
       <CatalogDetail niche={niche} related={related} />
       <Footer />
     </>
