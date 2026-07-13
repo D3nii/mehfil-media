@@ -66,10 +66,9 @@ function ReelCard({ reel, index }: { reel: Reel; index: number }) {
           <p className="text-xs leading-relaxed text-ivory/85">
             {reel.caption}
           </p>
-          <div className="flex gap-4 text-[11px] font-medium text-ivory/90">
-            <span>♥ {reel.likes}</span>
-            <span>↗ {reel.shares}</span>
-          </div>
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-ivory/60">
+            Concept reel · Mehfil studio
+          </p>
         </div>
       </div>
     </motion.article>
@@ -96,7 +95,7 @@ export function ReelStrip() {
   const ghostX = useTransform(smooth, [0, 1], ["10%", "-40%"]);
 
   return (
-    <section id="work" ref={ref} className="relative h-[400vh] bg-ink">
+    <section id="work" ref={ref} className="relative h-[340vh] bg-ink">
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         {/* oversized ghost typography drifting behind the strip */}
         <motion.p

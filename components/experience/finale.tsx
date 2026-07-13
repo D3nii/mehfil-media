@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 
@@ -64,10 +65,8 @@ export function Finale() {
         </h2>
 
         <Magnetic strength={0.4} className="inline-block">
-          <a
-            href={DISCORD_INVITE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/signup"
             data-cursor="Let's go"
             className="group inline-flex items-center gap-4 rounded-full bg-ivory px-10 py-5 text-lg font-medium text-ink transition-colors hover:bg-rani hover:text-ivory"
           >
@@ -75,11 +74,20 @@ export function Finale() {
             <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
               ↗
             </span>
-          </a>
+          </Link>
         </Magnetic>
 
         <p className="mt-8 text-sm text-ivory/50">
-          First concept free. No shoot. No wait.
+          First concept free. No shoot. No wait.{" "}
+          <a
+            href={DISCORD_INVITE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-ivory/30 underline-offset-4 transition-colors hover:text-ivory"
+          >
+            Or talk to us first
+          </a>
+          .
         </p>
 
         {/* marquee */}

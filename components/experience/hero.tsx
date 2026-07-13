@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import {
   motion,
@@ -113,7 +114,7 @@ export function Hero() {
   ];
 
   return (
-    <section ref={ref} aria-label="Hero" className="relative h-[300vh]">
+    <section ref={ref} aria-label="Hero" className="relative h-[260vh]">
       <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
         {/* ambient accent wash that warms up as the story progresses */}
         <motion.div
@@ -158,7 +159,7 @@ export function Hero() {
         </div>
 
         {/* central stage */}
-        <div className="relative z-10 mt-[24vh] h-[52vh] w-[min(64vw,320px)] md:h-[56vh]">
+        <div className="relative z-10 mt-[16vh] h-[42vh] w-[min(56vw,270px)] md:h-[44vh]">
           {/* variation cards behind the phone */}
           {heroImages.variations.map((src, i) => (
             <VariationCard
@@ -249,9 +250,8 @@ export function Hero() {
                     Unboxing the jhumkas everyone asked about ✨
                   </p>
                   <div className="flex gap-4 text-[11px] font-medium text-ivory/90">
-                    <span>♥ 531K</span>
-                    <span>↗ 64K</span>
-                    <span>◎ 4.1M plays</span>
+                    <span>Generated from 1 photo</span>
+                    <span>Delivered in 48h</span>
                   </div>
                 </div>
               </motion.div>
@@ -259,20 +259,34 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* scroll hint */}
+        {/* value prop + CTAs + scroll hint */}
         <motion.div
-          className="absolute bottom-8 z-20 flex flex-col items-center gap-2"
+          className="absolute inset-x-0 bottom-5 z-20 flex flex-col items-center gap-4 px-6"
           style={{ opacity: scrollHintOpacity }}
         >
-          <span className="text-[11px] uppercase tracking-[0.3em] text-muted">
+          <p className="mx-auto max-w-xl text-center text-sm leading-relaxed text-muted">
+            Send one product photo. An AI creator turns it into a full reel
+            campaign for your Pakistani audience — delivered in 48 hours.
+          </p>
+          <div className="flex items-center justify-center gap-3">
+            <Link
+              href="/signup"
+              data-cursor="Go"
+              className="rounded-full bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors hover:bg-rani"
+            >
+              Start a project
+            </Link>
+            <a
+              href="#work"
+              data-cursor="Go"
+              className="rounded-full border border-ink/20 px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-rani hover:text-rani"
+            >
+              See the work
+            </a>
+          </div>
+          <span className="text-[11px] uppercase tracking-[0.3em] text-muted/70">
             Scroll to transform
           </span>
-          <motion.span
-            aria-hidden
-            className="h-8 w-px bg-ink/30"
-            animate={{ scaleY: [1, 0.4, 1] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          />
         </motion.div>
       </div>
     </section>

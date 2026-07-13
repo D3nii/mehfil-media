@@ -65,14 +65,16 @@ type PanelProps = {
 /** Crossfading visual panel tied to one step's scroll segment. */
 function Panel({ index, progress, children }: PanelProps) {
   const [start, end] = segment(index, steps.length);
+  // Incoming and outgoing panels crossfade over the same window (centered on
+  // the segment boundary) so no scroll position renders an empty frame.
   const fade = 0.035;
   const opacity = useTransform(
     progress,
     index === 0
       ? [start, end - fade, end]
       : index === steps.length - 1
-        ? [start, start + fade, end]
-        : [start, start + fade, end - fade, end],
+        ? [start - fade, start, end]
+        : [start - fade, start, end - fade, end],
     index === 0
       ? [1, 1, 0]
       : index === steps.length - 1
@@ -98,14 +100,15 @@ type StepTextProps = {
 
 function StepText({ index, progress }: StepTextProps) {
   const [start, end] = segment(index, steps.length);
+  // See Panel: crossfade windows overlap at segment boundaries.
   const fade = 0.03;
   const opacity = useTransform(
     progress,
     index === 0
       ? [start, end - fade, end]
       : index === steps.length - 1
-        ? [start, start + fade, end]
-        : [start, start + fade, end - fade, end],
+        ? [start - fade, start, end]
+        : [start - fade, start, end - fade, end],
     index === 0
       ? [1, 1, 0]
       : index === steps.length - 1
@@ -271,9 +274,11 @@ type DeliverThumbProps = {
 function DeliverThumb({ src, index, progress }: DeliverThumbProps) {
   const [start, end] = segment(4, steps.length);
   const span = end - start;
-  const at = start + span * (0.1 + index * 0.09);
-  const opacity = useTransform(progress, [at, at + 0.025], [0, 1]);
-  const y = useTransform(progress, [at, at + 0.025], [26, 0]);
+  // Start revealing immediately so no scroll position inside this segment
+  // shows an empty panel.
+  const at = start + span * (0.02 + index * 0.05);
+  const opacity = useTransform(progress, [at, at + 0.02], [0, 1]);
+  const y = useTransform(progress, [at, at + 0.02], [26, 0]);
 
   return (
     <motion.div
@@ -314,7 +319,7 @@ export function Pipeline() {
   const railScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="how" ref={ref} className="relative h-[500vh] bg-ivory-deep">
+    <section id="how" ref={ref} className="relative h-[420vh] bg-ivory-deep">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-10 px-6 md:grid-cols-2 md:px-16">
           {/* progress rail */}
