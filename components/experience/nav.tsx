@@ -90,13 +90,6 @@ export function ExperienceNav() {
           >
             Catalog
           </Link>
-          <Link
-            href="/login"
-            data-cursor="Go"
-            className="rounded-full px-4 py-2 text-sm text-ink-soft transition-colors hover:bg-ink/5 hover:text-ink"
-          >
-            Sign in
-          </Link>
         </div>
 
         <Magnetic strength={0.25}>
