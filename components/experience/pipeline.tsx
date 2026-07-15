@@ -154,6 +154,8 @@ function CastingPanel({ progress }: { progress: MotionValue<number> }) {
             fill
             className="object-cover"
             sizes="220px"
+            loading={i === 0 ? undefined : "lazy"}
+            fetchPriority={i === 0 ? "auto" : "low"}
           />
           <div className="absolute bottom-3 left-3 rounded-full bg-ivory/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-ink backdrop-blur">
             {creator.name}
@@ -238,6 +240,8 @@ function RenderPanel({ progress }: { progress: MotionValue<number> }) {
           fill
           className="object-cover"
           sizes="320px"
+          loading="lazy"
+          fetchPriority="low"
         />
       </motion.div>
       <div className="absolute inset-x-5 bottom-5 rounded-full bg-ink/60 p-1 backdrop-blur">
@@ -291,6 +295,8 @@ function DeliverThumb({ src, index, progress }: DeliverThumbProps) {
         fill
         className="object-cover"
         sizes="140px"
+        loading="lazy"
+        fetchPriority="low"
       />
       <span className="absolute bottom-2 left-2 rounded bg-ivory/85 px-1.5 py-0.5 text-[9px] font-semibold text-ink">
         9:16

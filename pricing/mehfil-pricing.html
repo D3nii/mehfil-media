@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Mehfil — Pricing</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ivory: #faf6f0;
+    --ivory-deep: #f3ede4;
+    --ink: #171310;
+    --ink-soft: #4a423b;
+    --muted: #877d73;
+    --rani: #c40d53;
+    --line: rgba(23, 19, 16, 0.12);
+  }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--ivory);
+    color: var(--ink);
+    width: 210mm;
+    height: 297mm;
+    padding: 14mm 14mm 10mm;
+    display: flex;
+    flex-direction: column;
+    -webkit-print-color-adjust: exact;
+  }
+  .serif { font-family: Georgia, "Times New Roman", serif; font-style: italic; }
+  .rani { color: var(--rani); }
+  .kicker {
+    font-size: 8px; font-weight: 700; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .kicker::before { content: ""; display: block; width: 28px; height: 1px; background: var(--rani); }
+
+  header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8mm; }
+  .logo { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+  .logo span { font-size: 13px; color: var(--rani); margin-left: 6px; }
+
+  h1 { font-size: 40px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.02; margin: 4mm 0 2.5mm; }
+  .lede { font-size: 11.5px; line-height: 1.6; color: var(--ink-soft); max-width: 125mm; margin-bottom: 8mm; }
+
+  .packages { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5mm; margin-bottom: 8mm; }
+  .card {
+    border: 1px solid var(--line); border-radius: 14px;
+    background: #fff; padding: 7mm 6mm; display: flex; flex-direction: column;
+  }
+  .card.featured { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+  .card.featured .muted, .card.featured li { color: rgba(250, 246, 240, 0.75); }
+  .card.featured .price { color: var(--ivory); }
+  .pkg-num { font-size: 8px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rani); margin-bottom: 3mm; }
+  .pkg-name { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 1.5mm; }
+  .pkg-tag { font-size: 9.5px; line-height: 1.5; color: var(--muted); margin-bottom: 4mm; min-height: 11mm; }
+  .price { font-size: 26px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5mm; }
+  .price small { font-size: 9px; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+  .per { font-size: 8.5px; color: var(--muted); margin-bottom: 4.5mm; }
+  .sect { font-size: 7.5px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rani); margin: 3.5mm 0 2mm; }
+  ul { list-style: none; }
+  li { font-size: 9.5px; line-height: 1.55; color: var(--ink-soft); padding-left: 4mm; position: relative; margin-bottom: 1.2mm; }
+  li::before { content: "✦"; position: absolute; left: 0; top: 0; font-size: 7px; color: var(--rani); }
+  li.no::before { content: "—"; color: var(--muted); }
+  .badge {
+    display: inline-block; background: var(--rani); color: var(--ivory);
+    font-size: 7.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    border-radius: 999px; padding: 2px 9px; margin-bottom: 3mm; align-self: flex-start;
+  }
+
+  .included {
+    border-top: 1px solid var(--line); padding-top: 5mm; margin-bottom: 7mm;
+    display: grid; grid-template-columns: auto 1fr 1fr 1fr 1fr; gap: 6mm; align-items: start;
+  }
+  .included .kicker { padding-top: 1mm; }
+  .inc-item p:first-child { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.8mm; }
+  .inc-item p:last-child { font-size: 8.5px; color: var(--muted); line-height: 1.5; }
+
+  footer {
+    margin-top: auto; background: var(--ink); color: var(--ivory);
+    border-radius: 16px; padding: 7mm 8mm;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer .urdu { font-size: 12px; color: var(--rani); margin-bottom: 1.5mm; }
+  footer h2 { font-size: 19px; font-weight: 500; letter-spacing: -0.02em; }
+  footer .cta {
+    background: var(--ivory); color: var(--ink); border-radius: 999px;
+    font-size: 10.5px; font-weight: 600; padding: 3.5mm 7mm; white-space: nowrap;
+  }
+  footer .note { font-size: 8px; color: rgba(250,246,240,0.55); margin-top: 1.5mm; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">Mehfil<span>محفل</span></div>
+    <div class="kicker">Pricing · 2026</div>
+  </header>
+
+  <div class="kicker">What you bring, what we build</div>
+  <h1>Three ways to <span class="serif rani">join the mehfil.</span></h1>
+  <p class="lede">
+    Every package ends the same way: an AI creator performing your product in a
+    ready-to-post reel campaign, delivered within 48 hours. The only difference
+    is how much of the creative you hand us — and how much we take off your plate.
+  </p>
+
+  <div class="packages">
+    <div class="card">
+      <p class="pkg-num">Package 01</p>
+      <p class="pkg-name">The Director's Cut</p>
+      <p class="pkg-tag">You've done the creative thinking. We bring it to life, frame by frame.</p>
+      <p class="price">PKR 25,000</p>
+      <p class="per">per product campaign</p>
+      <p class="sect">You provide</p>
+      <ul>
+        <li>Product images</li>
+        <li>Character idea, in detail</li>
+        <li>Full script</li>
+        <li>Scene direction, in detail</li>
+      </ul>
+      <p class="sect">We deliver</p>
+      <ul>
+        <li>AI creator cast to your brief</li>
+        <li>Generated hero reel + cuts</li>
+        <li>All ratios, ready to post</li>
+      </ul>
+    </div>
+
+    <div class="card featured">
+      <span class="badge">Most popular</span>
+      <p class="pkg-num">Package 02</p>
+      <p class="pkg-name">The Co-Write</p>
+      <p class="pkg-tag">You know the face and the setting. We write the words that sell.</p>
+      <p class="price">PKR 40,000</p>
+      <p class="per">per product campaign</p>
+      <p class="sect">You provide</p>
+      <ul>
+        <li>Product images</li>
+        <li>Character idea, in detail</li>
+        <li>Scene direction, in detail</li>
+      </ul>
+      <p class="sect">We deliver</p>
+      <ul>
+        <li>Script — hooks, desi idiom, CTA</li>
+        <li>AI creator cast to your brief</li>
+        <li>Generated hero reel + cuts</li>
+        <li>All ratios, ready to post</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p class="pkg-num">Package 03</p>
+      <p class="pkg-name">The Full Mehfil</p>
+      <p class="pkg-tag">Send us product photos. Walk away. Come back to a campaign.</p>
+      <p class="price">PKR 65,000</p>
+      <p class="per">per product campaign</p>
+      <p class="sect">You provide</p>
+      <ul>
+        <li>Product images — that's it</li>
+      </ul>
+      <p class="sect">We deliver</p>
+      <ul>
+        <li>Creator concept &amp; casting</li>
+        <li>Script — hooks, desi idiom, CTA</li>
+        <li>Scene &amp; art direction</li>
+        <li>Generated hero reel + cuts</li>
+        <li>All ratios, ready to post</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="included">
+    <div class="kicker">Every package</div>
+    <div class="inc-item"><p>48h</p><p>from brief to delivered campaign</p></div>
+    <div class="inc-item"><p>30+</p><p>assets per product — cuts, hooks, ratios</p></div>
+    <div class="inc-item"><p>∞</p><p>reshoots and revisions included</p></div>
+    <div class="inc-item"><p>1/10th</p><p>the cost of a traditional shoot day</p></div>
+  </div>
+
+  <footer>
+    <div>
+      <p class="urdu">محفل میں خوش آمدید</p>
+      <h2>Ready? Send us your product.</h2>
+      <p class="note">First concept free. No shoot. No wait. — mehfil.media</p>
+    </div>
+    <div class="cta">Start a project ↗</div>
+  </footer>
+</body>
+</html>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
+import { preloadImage } from "@/lib/media";
 import { categories } from "@/lib/showcase";
 
 /**
@@ -14,6 +15,11 @@ import { categories } from "@/lib/showcase";
 export function Worlds() {
   const [active, setActive] = useState(0);
   const current = categories[active];
+
+  function selectCategory(index: number) {
+    setActive(index);
+    preloadImage(categories[index].image);
+  }
 
   return (
     <section
@@ -55,9 +61,9 @@ export function Worlds() {
                   <button
                     type="button"
                     data-cursor="Switch"
-                    onMouseEnter={() => setActive(i)}
-                    onFocus={() => setActive(i)}
-                    onClick={() => setActive(i)}
+                    onMouseEnter={() => selectCategory(i)}
+                    onFocus={() => selectCategory(i)}
+                    onClick={() => selectCategory(i)}
                     className="group flex w-full items-baseline justify-between gap-6 border-b border-line py-4 text-left transition-colors"
                     aria-pressed={isActive}
                   >
@@ -114,6 +120,8 @@ export function Worlds() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 448px"
+                    loading="lazy"
+                    fetchPriority="low"
                   />
                 </motion.div>
               </AnimatePresence>

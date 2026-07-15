@@ -3,12 +3,22 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
+import { preloadImage } from "@/lib/media";
+import { heroImages } from "@/lib/showcase";
+
 const words = ["محفل", "Mehfil", "Media"];
 
 /** Opening sequence: three words flash, then the curtain lifts. */
 export function Loader() {
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    // Use the intro window to warm hero assets before the curtain lifts.
+    preloadImage(heroImages.product);
+    preloadImage(heroImages.creator);
+    preloadImage(heroImages.videoPoster);
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -11,6 +11,7 @@ import {
   type MotionValue,
 } from "motion/react";
 
+import { DeferredVideo } from "@/components/experience/deferred-video";
 import { heroImages } from "@/lib/showcase";
 
 type VariationCardProps = {
@@ -38,6 +39,8 @@ function VariationCard({ src, index, spread, position }: VariationCardProps) {
         fill
         className="object-cover"
         sizes="320px"
+        loading="lazy"
+        fetchPriority="low"
       />
       <div className="absolute bottom-3 left-3 rounded-full bg-ivory/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-ink backdrop-blur">
         Cut {String(index + 1).padStart(2, "0")}
@@ -54,6 +57,7 @@ function VariationCard({ src, index, spread, position }: VariationCardProps) {
  */
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const [loadHeroVideo, setLoadHeroVideo] = useState(false);
   const { scrollYProgress: rawProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
@@ -65,6 +69,17 @@ export function Hero() {
     damping: 50,
     restDelta: 0.0005,
   });
+
+  // Defer the hero reel until the creator scene is approaching.
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (value) => {
+      if (value > 0.22) {
+        setLoadHeroVideo(true);
+      }
+    });
+
+    return unsubscribe;
+  }, [scrollYProgress]);
 
   // ── scene 1: product ───────────────────────────────────────
   const productOpacity = useTransform(scrollYProgress, [0.24, 0.34], [1, 0]);
@@ -215,19 +230,25 @@ export function Hero() {
                 fill
                 className="object-cover"
                 sizes="320px"
+                priority
+                fetchPriority="high"
               />
 
               {/* the actual generated reel fades in and plays */}
-              <motion.video
-                src={heroImages.video}
-                poster={heroImages.videoPoster}
-                muted
-                loop
-                autoPlay
-                playsInline
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ opacity: chromeOpacity }}
-              />
+              {loadHeroVideo ? (
+                <motion.div
+                  className="absolute inset-0"
+                  style={{ opacity: chromeOpacity }}
+                >
+                  <DeferredVideo
+                    src={heroImages.video}
+                    poster={heroImages.videoPoster}
+                    alt="Generated earring reel"
+                    eager
+                    className="absolute inset-0"
+                  />
+                </motion.div>
+              ) : null}
 
               {/* reel chrome */}
               <motion.div
