@@ -7,7 +7,9 @@ import { Loader } from "@/components/experience/loader";
 import { Manifesto } from "@/components/experience/manifesto";
 import { ExperienceNav } from "@/components/experience/nav";
 import { Pipeline } from "@/components/experience/pipeline";
+import { Proof } from "@/components/experience/proof";
 import { ReelStrip } from "@/components/experience/reel-strip";
+import { SectionCta } from "@/components/experience/section-cta";
 import { Worlds } from "@/components/experience/worlds";
 
 export default function Home() {
@@ -19,8 +21,14 @@ export default function Home() {
       <main>
         <Hero />
         <Manifesto />
+        <Proof />
         <Pipeline />
+        <SectionCta headline="Five steps for us. One upload for you." />
         <ReelStrip />
+        <SectionCta
+          tone="dark"
+          headline="Your product could be the next frame."
+        />
         <Worlds />
         <Finale />
       </main>

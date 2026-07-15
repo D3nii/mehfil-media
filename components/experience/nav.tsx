@@ -42,7 +42,28 @@ export function ExperienceNav() {
   }, []);
 
   return (
-    <motion.header
+    <>
+      {/* persistent CTA that takes over while the nav is tucked away */}
+      <motion.div
+        className="fixed right-5 top-5 z-[89]"
+        initial={false}
+        animate={{
+          y: hidden ? 0 : -110,
+          opacity: hidden ? 1 : 0,
+        }}
+        transition={{ type: "spring", stiffness: 260, damping: 30 }}
+      >
+        <Link
+          href="/signup"
+          data-cursor="Go"
+          tabIndex={hidden ? 0 : -1}
+          className="block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-ivory shadow-[0_10px_30px_rgba(23,19,16,0.25)] backdrop-blur transition-colors hover:bg-rani"
+        >
+          Start a project
+        </Link>
+      </motion.div>
+
+      <motion.header
       className="fixed inset-x-0 top-5 z-[90] flex justify-center px-5"
       animate={{ y: hidden ? -110 : 0 }}
       transition={{ type: "spring", stiffness: 260, damping: 30 }}
@@ -103,5 +124,6 @@ export function ExperienceNav() {
         </Magnetic>
       </motion.nav>
     </motion.header>
+    </>
   );
 }

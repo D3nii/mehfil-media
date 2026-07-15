@@ -119,6 +119,9 @@ export function Hero() {
   );
   const h3Opacity = useTransform(scrollYProgress, [0.66, 0.76], [0, 1]);
 
+  // CTA block stays through the whole product scene; only the scroll hint
+  // disappears as soon as the visitor commits.
+  const ctaOpacity = useTransform(scrollYProgress, [0.2, 0.28], [1, 0]);
   const scrollHintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   const variationPositions = [
@@ -130,7 +133,7 @@ export function Hero() {
 
   return (
     <section ref={ref} aria-label="Hero" className="relative h-[260vh]">
-      <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
+      <div className="sticky top-0 flex h-screen flex-col items-center overflow-hidden">
         {/* ambient accent wash that warms up as the story progresses */}
         <motion.div
           aria-hidden
@@ -143,7 +146,7 @@ export function Hero() {
         />
 
         {/* headlines */}
-        <div className="pointer-events-none absolute inset-x-0 top-[13vh] z-20 px-6 text-center">
+        <div className="pointer-events-none absolute inset-x-0 top-[11vh] z-20 px-6 text-center">
           <motion.div style={{ opacity: h1Opacity, y: h1Y }}>
             <h1 className="mx-auto max-w-5xl text-[13vw] font-medium leading-[0.95] tracking-tight md:text-[7.5vw]">
               Your product has
@@ -174,7 +177,7 @@ export function Hero() {
         </div>
 
         {/* central stage */}
-        <div className="relative z-10 mt-[16vh] h-[42vh] w-[min(56vw,270px)] md:h-[44vh]">
+        <div className="relative z-10 mt-[30vh] h-[40vh] w-[min(56vw,270px)] md:h-[42vh]">
           {/* variation cards behind the phone */}
           {heroImages.variations.map((src, i) => (
             <VariationCard
@@ -280,14 +283,17 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* value prop + CTAs + scroll hint */}
+        {/* value prop + CTAs — in flow, right under the stage */}
         <motion.div
-          className="absolute inset-x-0 bottom-5 z-20 flex flex-col items-center gap-4 px-6"
-          style={{ opacity: scrollHintOpacity }}
+          className="z-20 mt-8 flex flex-col items-center gap-4 px-6"
+          style={{ opacity: ctaOpacity }}
         >
           <p className="mx-auto max-w-xl text-center text-sm leading-relaxed text-muted">
-            Send one product photo. An AI creator turns it into a full reel
-            campaign for your Pakistani audience — delivered in 48 hours.
+            <span className="font-semibold text-ink">
+              One product photo in, a full reel campaign out
+            </span>{" "}
+            — an AI creator made for your Pakistani audience, delivered in 48
+            hours.
           </p>
           <div className="flex items-center justify-center gap-3">
             <Link
@@ -295,7 +301,7 @@ export function Hero() {
               data-cursor="Go"
               className="rounded-full bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors hover:bg-rani"
             >
-              Start a project
+              Get your first concept free
             </Link>
             <a
               href="#work"
@@ -305,10 +311,18 @@ export function Hero() {
               See the work
             </a>
           </div>
-          <span className="text-[11px] uppercase tracking-[0.3em] text-muted/70">
-            Scroll to transform
-          </span>
+          <p className="text-xs text-muted/80">
+            No shoot. No wait. No card required.
+          </p>
         </motion.div>
+
+        {/* scroll hint stays pinned to the bottom edge */}
+        <motion.span
+          className="absolute bottom-5 z-20 text-[11px] uppercase tracking-[0.3em] text-muted/70"
+          style={{ opacity: scrollHintOpacity }}
+        >
+          Scroll to transform
+        </motion.span>
       </div>
     </section>
   );
