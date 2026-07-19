@@ -1,0 +1,147 @@
+/* ── Mehfil Dimension 3 — dark world tokens ─────────────────── */
+
+.three-root {
+  --d3-bg: #0b0908;
+  --d3-bg-soft: #14100e;
+  --d3-ivory: #faf6f0;
+  --d3-ivory-dim: rgba(250, 246, 240, 0.55);
+  --d3-line: rgba(250, 246, 240, 0.12);
+  --d3-rani: #e01a68;
+  --d3-rani-deep: #c40d53;
+  --d3-gold: #daa54a;
+
+  background: var(--d3-bg);
+  color: var(--d3-ivory);
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.three-root ::selection {
+  background: var(--d3-rani);
+  color: var(--d3-ivory);
+}
+
+/* outlined display type on dark */
+.d3-stroke {
+  -webkit-text-stroke: 1.5px rgba(250, 246, 240, 0.85);
+  color: transparent;
+}
+
+.d3-stroke-rani {
+  -webkit-text-stroke: 1.5px var(--d3-rani);
+  color: transparent;
+}
+
+/* thin technical label */
+.d3-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--d3-ivory-dim);
+}
+
+/* chromatic edge glow used on section frames */
+.d3-frame {
+  border: 1px solid var(--d3-line);
+  box-shadow:
+    inset 0 0 0 1px rgba(224, 26, 104, 0.04),
+    0 0 80px rgba(224, 26, 104, 0.06);
+}
+
+/* scanline sheen sweeping across holographic surfaces */
+@keyframes d3-scan {
+  from {
+    transform: translateY(-120%);
+  }
+  to {
+    transform: translateY(320%);
+  }
+}
+
+.d3-scanline {
+  position: absolute;
+  inset-inline: 0;
+  height: 34%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(224, 26, 104, 0.16),
+    rgba(250, 246, 240, 0.1),
+    transparent
+  );
+  animation: d3-scan 4.2s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  pointer-events: none;
+}
+
+/* slow hue-drifting aurora wash behind HTML sections */
+@keyframes d3-aurora {
+  0%,
+  100% {
+    transform: translate3d(-6%, -4%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, 5%, 0) scale(1.15);
+  }
+}
+
+.d3-aurora {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 40% 32% at 30% 40%,
+      rgba(224, 26, 104, 0.14),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 34% 28% at 72% 60%,
+      rgba(218, 165, 74, 0.08),
+      transparent 70%
+    );
+  animation: d3-aurora 16s ease-in-out infinite;
+}
+
+/* ticking marquee */
+@keyframes d3-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.d3-marquee-track {
+  animation: d3-marquee 30s linear infinite;
+}
+
+.d3-marquee-track-reverse {
+  animation: d3-marquee 38s linear infinite reverse;
+}
+
+/* blinking caret for the terminal readouts */
+@keyframes d3-blink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.d3-caret {
+  animation: d3-blink 1.1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d3-marquee-track,
+  .d3-marquee-track-reverse,
+  .d3-aurora,
+  .d3-scanline {
+    animation: none;
+  }
+}
