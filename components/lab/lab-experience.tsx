@@ -6,6 +6,10 @@ import { useEffect, useRef } from "react";
 
 import { DissolveMorph } from "@/components/lab/dissolve-morph";
 import { FluidCanvas } from "@/components/lab/fluid/fluid-canvas";
+import {
+  LabThemeToggle,
+  useLabTheme,
+} from "@/components/lab/lab-theme-toggle";
 import { heroImages, reels, studio } from "@/lib/showcase";
 import { DISCORD_INVITE_URL } from "@/lib/links";
 
@@ -196,17 +200,22 @@ const tickerItems = [
 /* ── page ────────────────────────────────────────────────────── */
 
 export function LabExperience() {
+  const [theme, setTheme] = useLabTheme();
+
   return (
-    <div className="lab">
+    <div className="lab" data-theme={theme}>
       <div className="lab-progress" aria-hidden />
 
       <div className="lab-bar">
         <Link href="/">
           Mehfil <span className="lab-urdu">محفل</span>
         </Link>
-        <a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer">
-          Start a project
-        </a>
+        <div className="lab-bar__actions">
+          <LabThemeToggle theme={theme} onThemeChange={setTheme} />
+          <a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer">
+            Start a project
+          </a>
+        </div>
       </div>
 
       {/* act 1 — the ink room */}
